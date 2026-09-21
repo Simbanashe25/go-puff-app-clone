@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "gopuff",
+    "slug": "gopuff-clone",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-asset",
+      "expo-font"
+    ],
+    "android": {
+      "package": "com.anonymous.gopuffclone"
+    }
+  }
+}
