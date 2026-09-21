@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  useWindowDimensions,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { GOPUFF_FONTS } from '../constants/theme';
@@ -23,6 +24,8 @@ export const GiftModal: React.FC<GiftModalProps> = ({
   onClose,
   onRemove,
 }) => {
+  const { width } = useWindowDimensions();
+  const isMobile = width < 768;
   const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');
   const [message, setMessage] = useState('');
@@ -37,10 +40,15 @@ export const GiftModal: React.FC<GiftModalProps> = ({
   };
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={close}>
-      <View style={styles.overlay}>
+    <Modal
+      visible={visible}
+      transparent
+      animationType={isMobile ? 'slide' : 'fade'}
+      onRequestClose={close}
+    >
+      <View style={[styles.overlay, isMobile && styles.overlayMobile]}>
         <TouchableOpacity style={styles.backdrop} onPress={close} activeOpacity={1} />
-        <View style={styles.modalCard}>
+        <View style={[styles.modalCard, isMobile && styles.modalCardMobile]}>
           <View style={styles.header}>
             <Text style={styles.title}>MAKE THIS ORDER A GIFT.</Text>
             <TouchableOpacity onPress={close} accessibilityLabel="Close gift modal">
@@ -124,6 +132,7 @@ export const GiftModal: React.FC<GiftModalProps> = ({
 
 const styles = StyleSheet.create({
   overlay: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  overlayMobile: { justifyContent: 'flex-end' },
   backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,0.68)' },
   modalCard: {
     width: 720,
@@ -133,6 +142,15 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     overflow: 'hidden',
     ...Platform.select({ web: { boxShadow: '0 10px 32px rgba(0,0,0,0.28)' } as any }),
+  },
+  modalCardMobile: {
+    width: '100%',
+    maxWidth: '100%',
+    maxHeight: '90%',
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    borderTopLeftRadius: 22,
+    borderTopRightRadius: 22,
   },
   header: {
     minHeight: 78,

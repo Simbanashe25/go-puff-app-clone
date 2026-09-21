@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  useWindowDimensions,
 } from 'react-native';
 import { Feather, Ionicons } from '@expo/vector-icons';
 import { GOPUFF_FONTS } from '../constants/theme';
@@ -32,6 +33,8 @@ export const LocationModal: React.FC<LocationModalProps> = ({
   onClose,
   onSelect,
 }) => {
+  const { width } = useWindowDimensions();
+  const isMobile = width < 768;
   const [screen, setScreen] = useState<'list' | 'search' | 'details'>('list');
   const [query, setQuery] = useState('');
   const [selectedResult, setSelectedResult] = useState<SavedLocation | null>(null);
@@ -128,10 +131,15 @@ export const LocationModal: React.FC<LocationModalProps> = ({
   };
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={close}>
-      <View style={styles.overlay}>
+    <Modal
+      visible={visible}
+      transparent
+      animationType={isMobile ? 'slide' : 'fade'}
+      onRequestClose={close}
+    >
+      <View style={[styles.overlay, isMobile && styles.overlayMobile]}>
         <TouchableOpacity style={styles.backdrop} onPress={close} activeOpacity={1} />
-        <View style={styles.card}>
+        <View style={[styles.card, isMobile && styles.cardMobile]}>
           <View style={styles.header}>
             {screen !== 'list' && (
               <TouchableOpacity onPress={() => setScreen(screen === 'details' ? 'search' : 'list')}>
@@ -244,8 +252,10 @@ const LocationRow: React.FC<{
 
 const styles = StyleSheet.create({
   overlay: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  overlayMobile: { justifyContent: 'flex-end' },
   backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,0.68)' },
   card: { width: 720, maxWidth: 'calc(100% - 28px)' as any, maxHeight: '86%', backgroundColor: '#FFFFFF', borderRadius: 22, overflow: 'hidden', ...Platform.select({ web: { boxShadow: '0 10px 32px rgba(0,0,0,0.28)' } as any }) },
+  cardMobile: { width: '100%', maxWidth: '100%', maxHeight: '90%', borderBottomLeftRadius: 0, borderBottomRightRadius: 0, borderTopLeftRadius: 22, borderTopRightRadius: 22 },
   header: { minHeight: 84, paddingHorizontal: 24, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 14 },
   title: { flex: 1, fontFamily: GOPUFF_FONTS.black, fontSize: 30, fontStyle: 'italic', color: '#111111' },
   listContent: { paddingHorizontal: 22, paddingBottom: 20 },
