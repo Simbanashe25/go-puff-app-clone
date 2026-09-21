@@ -72,18 +72,6 @@ export default function App() {
     'ABCGintoNormal-Black': require('./assets/fonts/ABCGintoNormal-Black.otf'),
   });
 
-  if (fontsError) {
-    throw fontsError;
-  }
-
-  if (!fontsLoaded) {
-    return (
-      <View style={styles.fontLoadingScreen}>
-        <ActivityIndicator size="small" color="#00A3FF" />
-      </View>
-    );
-  }
-
   // Inject ABC Ginto font family and @font-face rules on Web
   useEffect(() => {
     if (Platform.OS === 'web' && typeof document !== 'undefined') {
@@ -97,6 +85,18 @@ export default function App() {
       }
     }
   }, []);
+
+  if (fontsError) {
+    throw fontsError;
+  }
+
+  if (!fontsLoaded) {
+    return (
+      <View style={styles.fontLoadingScreen}>
+        <ActivityIndicator size="small" color="#00A3FF" />
+      </View>
+    );
+  }
 
   const handleMenuPress = () => {
     setIsMenuOpen(true);
