@@ -14,6 +14,7 @@ import { Feather, Ionicons } from '@expo/vector-icons';
 import { CategoryItem, GOPUFF_CATEGORIES } from '../data/categories';
 import { Product } from '../data/products';
 import { GOPUFF_FONTS } from '../constants/theme';
+import { LoadingSkeleton } from './LoadingSkeleton';
 import { ProductCard } from './ProductCard';
 
 const SUBCATEGORIES: Record<string, string[]> = {
@@ -61,6 +62,7 @@ export const CategoryScreen: React.FC<CategoryScreenProps> = ({
     );
   }, [category.id, initialSubcategory]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [bannerLoaded, setBannerLoaded] = useState(false);
   const [activeFilter, setActiveFilter] = useState('filter');
   const [sortOption, setSortOption] = useState('Most Relevant');
   const [nutritionFilters, setNutritionFilters] = useState<string[]>([]);
@@ -154,7 +156,10 @@ export const CategoryScreen: React.FC<CategoryScreenProps> = ({
                 source={{ uri: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=1400&q=85' }}
                 style={styles.bannerImage}
                 resizeMode="cover"
+                onLoad={() => setBannerLoaded(true)}
+                onError={() => setBannerLoaded(true)}
               />
+              {!bannerLoaded && <LoadingSkeleton style={styles.bannerSkeleton} />}
               <View style={styles.bannerOverlay}>
                 <Text style={styles.bannerTitle}>3 FOR 2{'\n'}{title}.</Text>
                 <TouchableOpacity style={styles.shopButton}>
@@ -370,6 +375,11 @@ const styles = StyleSheet.create({
   banner: { height: 215, borderRadius: 28, overflow: 'hidden', position: 'relative', marginBottom: 28 },
   bannerMobile: { height: 116, borderRadius: 25, marginHorizontal: 4, marginBottom: 34 },
   bannerImage: { width: '100%', height: '100%' },
+  bannerSkeleton: {
+    ...StyleSheet.absoluteFillObject,
+    borderRadius: 18,
+    zIndex: 1,
+  },
   bannerOverlay: { ...StyleSheet.absoluteFillObject, padding: 34, backgroundColor: 'rgba(4, 25, 37, 0.42)', justifyContent: 'space-between', alignItems: 'flex-start' },
   bannerTitle: { fontFamily: GOPUFF_FONTS.family, color: '#FFFFFF', fontSize: 30, lineHeight: 33, fontWeight: '900', fontStyle: 'italic' },
   shopButton: { borderWidth: 1, borderColor: '#FFFFFF', borderRadius: 20, paddingHorizontal: 13, paddingVertical: 7 },

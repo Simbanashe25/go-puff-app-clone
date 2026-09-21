@@ -11,6 +11,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { HERO_BANNERS_DATA } from '../data/banners';
 import { GOPUFF_FONTS } from '../constants/theme';
+import { LoadingSkeleton } from './LoadingSkeleton';
 
 interface HeroBannersSectionProps {
   onBannerPress?: (bannerId: string) => void;
@@ -37,6 +38,9 @@ export const HeroBannersSection: React.FC<HeroBannersSectionProps> = ({
   }, []);
 
   const currentSlide = HERO_BANNERS_DATA.carousel[activeSlideIndex];
+  const [loadedBanners, setLoadedBanners] = useState<Record<string, boolean>>({});
+  const markBannerLoaded = (id: string) =>
+    setLoadedBanners((previous) => ({ ...previous, [id]: true }));
 
   return (
     <View style={styles.container}>
@@ -51,7 +55,12 @@ export const HeroBannersSection: React.FC<HeroBannersSectionProps> = ({
             source={{ uri: HERO_BANNERS_DATA.featured.imageUrl }}
             style={styles.bannerImage}
             resizeMode="cover"
+            onLoad={() => markBannerLoaded(HERO_BANNERS_DATA.featured.id)}
+            onError={() => markBannerLoaded(HERO_BANNERS_DATA.featured.id)}
           />
+          {!loadedBanners[HERO_BANNERS_DATA.featured.id] && (
+            <LoadingSkeleton style={styles.bannerSkeleton} />
+          )}
           <LinearGradient
             colors={['transparent', 'rgba(0, 0, 0, 0.4)', 'rgba(0, 0, 0, 0.85)']}
             locations={[0.4, 0.7, 1]}
@@ -77,7 +86,10 @@ export const HeroBannersSection: React.FC<HeroBannersSectionProps> = ({
               source={{ uri: currentSlide.imageUrl }}
               style={styles.bannerImage}
               resizeMode="cover"
+              onLoad={() => markBannerLoaded(currentSlide.id)}
+              onError={() => markBannerLoaded(currentSlide.id)}
             />
+            {!loadedBanners[currentSlide.id] && <LoadingSkeleton style={styles.bannerSkeleton} />}
             <LinearGradient
               colors={['transparent', 'rgba(0, 0, 0, 0.4)', 'rgba(0, 0, 0, 0.85)']}
               locations={[0.3, 0.65, 1]}
@@ -116,7 +128,10 @@ export const HeroBannersSection: React.FC<HeroBannersSectionProps> = ({
                   source={{ uri: card.imageUrl }}
                   style={styles.bannerImage}
                   resizeMode="cover"
+                  onLoad={() => markBannerLoaded(card.id)}
+                  onError={() => markBannerLoaded(card.id)}
                 />
+                {!loadedBanners[card.id] && <LoadingSkeleton style={styles.bannerSkeleton} />}
                 <LinearGradient
                   colors={['transparent', 'rgba(0, 0, 0, 0.45)', 'rgba(0, 0, 0, 0.88)']}
                   locations={[0.2, 0.6, 1]}
@@ -197,6 +212,11 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     position: 'absolute',
+  },
+  bannerSkeleton: {
+    ...StyleSheet.absoluteFillObject,
+    borderRadius: 20,
+    zIndex: 1,
   },
   gradientOverlay: {
     ...StyleSheet.absoluteFillObject,

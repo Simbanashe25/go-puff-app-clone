@@ -87,6 +87,7 @@ export const BagScreen: React.FC<BagScreenProps> = ({
                 <BagItemRow
                   key={item.product.id}
                   item={item}
+                  isMobile={isMobile}
                   onAdd={onAdd}
                   onRemove={onRemove}
                   onProductPress={onProductPress}
@@ -171,7 +172,8 @@ const BagItemRow: React.FC<{
   onAdd: (product: Product) => void;
   onRemove: (product: Product) => void;
   onProductPress: (product: Product) => void;
-}> = ({ item, onAdd, onRemove, onProductPress }) => {
+  isMobile: boolean;
+}> = ({ item, onAdd, onRemove, onProductPress, isMobile }) => {
   const { product, quantity } = item;
   return (
     <View style={styles.itemRow}>
@@ -184,12 +186,12 @@ const BagItemRow: React.FC<{
         </View>
       </TouchableOpacity>
       <Image source={product.imageSource} style={styles.itemImage} resizeMode="contain" />
-      <View style={styles.quantityPill}>
-        <TouchableOpacity onPress={() => onRemove(product)} style={styles.quantityButton}>
+      <View style={[styles.quantityPill, isMobile && styles.quantityPillMobile]}>
+        <TouchableOpacity onPress={() => onRemove(product)} style={[styles.quantityButton, isMobile && styles.quantityButtonMobile]}>
           {quantity === 1 ? <Image source={TRASH_ICON} style={styles.trashIcon} /> : <Text style={styles.minus}>−</Text>}
         </TouchableOpacity>
         <Text style={styles.quantity}>{quantity}</Text>
-        <TouchableOpacity onPress={() => onAdd(product)} style={styles.quantityButton}>
+        <TouchableOpacity onPress={() => onAdd(product)} style={[styles.quantityButton, isMobile && styles.quantityButtonMobile]}>
           <Image source={PLUS_ICON} style={styles.bagPlus} />
         </TouchableOpacity>
       </View>
@@ -227,7 +229,9 @@ const styles = StyleSheet.create({
   dealLink: { fontFamily: GOPUFF_FONTS.family, fontWeight: '900', fontSize: 13, textDecorationLine: 'underline' },
   itemImage: { position: 'absolute', right: 46, top: 16, width: 98, height: 68 },
   quantityPill: { position: 'absolute', right: 0, bottom: 16, width: 112, height: 42, borderRadius: 23, borderWidth: 1, borderColor: '#E5E7EB', backgroundColor: '#FFFFFF', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 6, ...Platform.select({ web: { boxShadow: '0 2px 7px rgba(15, 23, 42, 0.18)' } as any }) },
+  quantityPillMobile: { width: 94, height: 38, borderRadius: 20, bottom: 12, paddingHorizontal: 3 },
   quantityButton: { width: 30, height: 34, justifyContent: 'center', alignItems: 'center' },
+  quantityButtonMobile: { width: 24, height: 30 },
   trashIcon: { width: 17, height: 17 },
   bagPlus: { width: 19, height: 19 },
   minus: { fontSize: 24, color: '#1111EE', lineHeight: 24 },

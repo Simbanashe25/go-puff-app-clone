@@ -36,6 +36,7 @@ import { AccountScreen } from './src/components/AccountScreen';
 import { SupportScreen } from './src/components/SupportScreen';
 import { LegalScreen } from './src/components/LegalScreen';
 import { MobileBottomNav } from './src/components/MobileBottomNav';
+import { LoadingSkeleton } from './src/components/LoadingSkeleton';
 
 export default function App() {
   const [cartItems, setCartItems] = useState<Record<string, BagItem>>({});
@@ -93,6 +94,9 @@ export default function App() {
   if (!fontsLoaded) {
     return (
       <View style={styles.fontLoadingScreen}>
+        <LoadingSkeleton style={styles.loadingLogoSkeleton} />
+        <LoadingSkeleton style={styles.loadingContentSkeleton} />
+        <LoadingSkeleton style={styles.loadingContentSkeleton} />
         <ActivityIndicator size="small" color="#00A3FF" />
       </View>
     );
@@ -547,6 +551,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 24,
+  },
+  loadingLogoSkeleton: {
+    width: 150,
+    height: 42,
+    borderRadius: 12,
+    marginBottom: 28,
+  },
+  loadingContentSkeleton: {
+    width: '100%',
+    height: 140,
+    borderRadius: 18,
+    marginBottom: 14,
   },
   pageContainer: {
     flex: 1,

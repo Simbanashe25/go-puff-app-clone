@@ -267,21 +267,21 @@ const DetailsCartActions: React.FC<{
         <Text style={styles.addToCartText}>ADD TO CART</Text>
       </TouchableOpacity>
     ) : (
-      <View style={styles.detailsQuantityPill}>
-        <TouchableOpacity onPress={onRemove} style={styles.detailsQuantityButton}>
+      <View style={[styles.detailsQuantityPill, compact && styles.detailsQuantityPillMobile]}>
+        <TouchableOpacity onPress={onRemove} style={[styles.detailsQuantityButton, compact && styles.detailsQuantityButtonMobile]}>
           <Image source={TRASH_ICON} style={styles.detailsTrashIcon} />
         </TouchableOpacity>
         <Text style={styles.detailsQuantityText}>{quantity}</Text>
-        <TouchableOpacity onPress={onAdd} style={styles.detailsQuantityButton}>
+        <TouchableOpacity onPress={onAdd} style={[styles.detailsQuantityButton, compact && styles.detailsQuantityButtonMobile]}>
           <Image source={PLUS_ICON} style={styles.detailsPlusIcon} />
         </TouchableOpacity>
       </View>
     )}
     {quantity > 0 && (
       <>
-        <TouchableOpacity style={styles.myBagButton} onPress={onBagPress}>
+        <TouchableOpacity style={[styles.myBagButton, compact && styles.myBagButtonMobile]} onPress={onBagPress}>
           <Image source={SHOPPING_BAG_ICON} style={styles.myBagIcon} />
-          <Text style={styles.myBagText}>MY BAG</Text>
+          <Text style={[styles.myBagText, compact && styles.myBagTextMobile]}>MY BAG</Text>
           <View style={styles.bagCountBadge}>
             <Text style={styles.bagCountText}>{quantity}</Text>
           </View>
@@ -640,6 +640,28 @@ const styles = StyleSheet.create({
   },
   detailsActionsMobile: {
     marginTop: 0,
+    gap: 8,
+  },
+  detailsQuantityPillMobile: {
+    width: 132,
+    height: 50,
+    borderRadius: 25,
+    paddingHorizontal: 8,
+    flexShrink: 0,
+  },
+  myBagButtonMobile: {
+    height: 50,
+    minWidth: 132,
+    flex: 1,
+    borderRadius: 25,
+    gap: 8,
+    paddingHorizontal: 12,
+  },
+  myBagTextMobile: {
+    fontSize: 16,
+  },
+  detailsQuantityButtonMobile: {
+    width: 28,
   },
   mobileCartActions: {
     width: '100%',

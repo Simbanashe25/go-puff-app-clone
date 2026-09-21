@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Product } from '../data/products';
 import { GOPUFF_FONTS } from '../constants/theme';
+import { LoadingSkeleton } from './LoadingSkeleton';
 
 const PLUS_ICON = require('../../assets/icons/plus (2).svg');
 const TRASH_ICON = require('../../assets/icons/trash (2).svg');
@@ -28,6 +29,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onPress,
 }) => {
   const [quantity, setQuantity] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const scaleAnim = React.useRef(new Animated.Value(1)).current;
 
   const handleAdd = () => {
@@ -76,10 +78,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     >
       {/* 1. Image Area with High-Res Packshot */}
       <View style={styles.imageArea}>
+        {!imageLoaded && <LoadingSkeleton style={styles.imageSkeleton} />}
         <Image
           source={product.imageSource}
           style={styles.packshotImage}
           resizeMode="contain"
+          onLoad={() => setImageLoaded(true)}
+          onError={() => setImageLoaded(true)}
         />
 
         {/* Crisp Native Mint Green Discount Pill */}
@@ -199,6 +204,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopLeftRadius: 14,
     borderTopRightRadius: 14,
+  },
+  imageSkeleton: {
+    ...StyleSheet.absoluteFillObject,
+    margin: 10,
+    borderRadius: 12,
+    zIndex: 1,
   },
   packshotImage: {
     width: '100%',
