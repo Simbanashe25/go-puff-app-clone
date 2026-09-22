@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { BagItem } from './BagScreen';
-import { GOPUFF_COLORS, GOPUFF_FONTS, GOPUFF_RADII, GOPUFF_SHADOWS, GOPUFF_SIZES, GOPUFF_SPACING } from '../constants/theme';
+import { GOPUFF_COLORS, GOPUFF_FONTS, GOPUFF_RADII, GOPUFF_SIZES, GOPUFF_SPACING } from '../constants/theme';
 
 interface Props {
   items: BagItem[];
@@ -44,14 +44,14 @@ export const OrderConfirmationScreen: React.FC<Props> = ({ items, total, orderNu
 );
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: GOPUFF_COLORS.pageBackground },
-  content: { width: '100%', maxWidth: 680, alignSelf: 'center', padding: GOPUFF_SPACING.xxl, alignItems: 'center' },
+  screen: { flex: 1, backgroundColor: GOPUFF_COLORS.white },
+  content: { width: '100%', maxWidth: 680, alignSelf: 'center', padding: 34, paddingTop: 30, paddingBottom: 48, alignItems: 'center' },
   successIcon: { width: 72, height: 72, borderRadius: 36, backgroundColor: GOPUFF_COLORS.success, alignItems: 'center', justifyContent: 'center', marginBottom: GOPUFF_SPACING.lg },
-  title: { fontFamily: GOPUFF_FONTS.black, fontSize: 34, fontWeight: '900', fontStyle: 'italic', color: GOPUFF_COLORS.black, textAlign: 'center', letterSpacing: -0.5 },
+  title: { fontFamily: GOPUFF_FONTS.family, fontSize: 30, fontWeight: '900', fontStyle: 'italic', color: GOPUFF_COLORS.black, textAlign: 'center', letterSpacing: -0.5 },
   message: { fontFamily: GOPUFF_FONTS.regular, fontSize: 17, color: GOPUFF_COLORS.grayText, textAlign: 'center', marginTop: GOPUFF_SPACING.sm },
   orderNumber: { fontFamily: GOPUFF_FONTS.black, fontSize: 14, fontWeight: '900', color: GOPUFF_COLORS.action, marginTop: GOPUFF_SPACING.md },
-  card: { width: '100%', backgroundColor: GOPUFF_COLORS.surface, borderRadius: GOPUFF_RADII.lg, padding: GOPUFF_SPACING.xl, marginTop: GOPUFF_SPACING.lg, ...GOPUFF_SHADOWS.card },
-  cardTitle: { fontFamily: GOPUFF_FONTS.black, fontSize: 18, fontWeight: '900', fontStyle: 'italic', color: GOPUFF_COLORS.black, marginBottom: GOPUFF_SPACING.lg },
+  card: { width: '100%', backgroundColor: GOPUFF_COLORS.surface, borderBottomWidth: 1, borderBottomColor: GOPUFF_COLORS.borderLight, paddingVertical: GOPUFF_SPACING.xl, marginTop: GOPUFF_SPACING.lg },
+  cardTitle: { fontFamily: GOPUFF_FONTS.family, fontSize: 22, fontWeight: '900', fontStyle: 'italic', color: GOPUFF_COLORS.black, marginBottom: GOPUFF_SPACING.lg },
   detailRow: { flexDirection: 'row', alignItems: 'center', gap: GOPUFF_SPACING.md, marginTop: GOPUFF_SPACING.sm },
   detailText: { fontFamily: GOPUFF_FONTS.regular, fontSize: 16, color: GOPUFF_COLORS.dark },
   itemRow: { flexDirection: 'row', alignItems: 'center', gap: GOPUFF_SPACING.sm, marginBottom: GOPUFF_SPACING.md },
@@ -60,10 +60,10 @@ const styles = StyleSheet.create({
   price: { fontFamily: GOPUFF_FONTS.bold, fontWeight: '800', color: GOPUFF_COLORS.black },
   divider: { height: 1, backgroundColor: GOPUFF_COLORS.borderLight, marginVertical: GOPUFF_SPACING.md },
   totalRow: { flexDirection: 'row', justifyContent: 'space-between' },
-  totalLabel: { fontFamily: GOPUFF_FONTS.black, fontSize: 18, fontWeight: '900' },
+  totalLabel: { fontFamily: GOPUFF_FONTS.family, fontSize: 20, fontWeight: '900', fontStyle: 'italic' },
   total: { fontFamily: GOPUFF_FONTS.black, fontSize: 22, fontWeight: '900', color: GOPUFF_COLORS.action },
   primaryButton: { width: '100%', height: GOPUFF_SIZES.controlHeight, borderRadius: GOPUFF_RADII.pill, backgroundColor: GOPUFF_COLORS.action, alignItems: 'center', justifyContent: 'center', marginTop: GOPUFF_SPACING.xl },
   buttonText: { fontFamily: GOPUFF_FONTS.black, fontSize: 16, fontWeight: '900', fontStyle: 'italic', color: GOPUFF_COLORS.white },
-  secondaryButton: { height: GOPUFF_SIZES.controlHeight, paddingHorizontal: GOPUFF_SPACING.xl, borderRadius: GOPUFF_RADII.pill, borderWidth: 2, borderColor: GOPUFF_COLORS.action, alignItems: 'center', justifyContent: 'center', marginTop: GOPUFF_SPACING.md },
-  secondaryText: { fontFamily: GOPUFF_FONTS.black, fontSize: 14, fontWeight: '900', color: GOPUFF_COLORS.action },
+  secondaryButton: { height: GOPUFF_SIZES.controlHeight, width: '100%', borderRadius: GOPUFF_RADII.pill, borderWidth: 2, borderColor: GOPUFF_COLORS.action, alignItems: 'center', justifyContent: 'center', marginTop: GOPUFF_SPACING.md },
+  secondaryText: { fontFamily: GOPUFF_FONTS.family, fontSize: 14, fontWeight: '900', fontStyle: 'italic', color: GOPUFF_COLORS.action },
 });
