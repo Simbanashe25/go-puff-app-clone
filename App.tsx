@@ -7,6 +7,7 @@ import {
   Platform,
   ScrollView,
   ActivityIndicator,
+  useWindowDimensions,
 } from 'react-native';
 import { useFonts } from 'expo-font';
 import { TopNav } from './src/components/TopNav';
@@ -21,7 +22,7 @@ import {
   EXCLUSIVE_DEALS_PRODUCTS,
   Product,
 } from './src/data/products';
-import { GOPUFF_FONTS } from './src/constants/theme';
+import { GOPUFF_FONTS, GOPUFF_SIZES } from './src/constants/theme';
 import { GINTO_FONT_CSS } from './src/constants/gintoFontFace';
 import { SiteFooter } from './src/components/SiteFooter';
 import { BagItem, BagScreen } from './src/components/BagScreen';
@@ -39,6 +40,7 @@ import { MobileBottomNav } from './src/components/MobileBottomNav';
 import { LoadingSkeleton } from './src/components/LoadingSkeleton';
 
 export default function App() {
+  const { width } = useWindowDimensions();
   const [cartItems, setCartItems] = useState<Record<string, BagItem>>({});
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>('deals');
   const [selectedSubcategory, setSelectedSubcategory] = useState<string | undefined>();
@@ -89,10 +91,12 @@ export default function App() {
   }, []);
 
   if (fontsError) {
-    throw fontsError;
+    console.error('Failed to load app fonts.', fontsError);
   }
 
-  if (!fontsLoaded) {
+  // Web fonts are injected independently above, so native font loading must
+  // not block the web shell from mounting.
+  if (Platform.OS !== 'web' && !fontsLoaded && !fontsError) {
     return (
       <View style={styles.fontLoadingScreen}>
         <LoadingSkeleton style={styles.loadingLogoSkeleton} />
@@ -424,7 +428,13 @@ export default function App() {
         onSearchSubmit={handleSearchSubmit}
       />
 
-      <ScrollView style={styles.mainScroll} contentContainerStyle={styles.scrollContent}>
+      <ScrollView
+        style={styles.mainScroll}
+        contentContainerStyle={[
+          styles.scrollContent,
+          width < GOPUFF_SIZES.desktopBreakpoint && styles.scrollContentMobile,
+        ]}
+      >
         {/* 2. Categories Sub-bar & Horizontal 12-badge strip */}
         <CategoriesSection
           selectedCategoryId={selectedCategoryId}
@@ -586,6 +596,9 @@ const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
     paddingBottom: 40,
+  },
+  scrollContentMobile: {
+    paddingBottom: 92,
   },
   footerNote: {
     padding: 24,

@@ -92,7 +92,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ visible, onClose, onAuthen
             showsVerticalScrollIndicator={false}
           >
             <Image source={APP_LOGO} style={styles.logo} resizeMode="cover" />
-            <Text style={styles.title}>{mode === 'signIn' ? 'WELCOME BACK.' : 'JOIN GOPUFF.'}</Text>
+            <Text style={styles.title}>{mode === 'signIn' ? 'WELCOME BACK.' : 'JOIN NOW NOW.'}</Text>
             <Text style={styles.description}>
               {mode === 'signIn'
                 ? 'Sign in to access your account and check out faster.'

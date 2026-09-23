@@ -17,7 +17,7 @@ export const GOPUFF_CATEGORIES: CategoryItem[] = [
   {
     id: 'apm',
     label: 'Aldi\nPrice Match',
-    bgColor: '#0B1B4F',
+    bgColor: '#2B005C',
     type: 'apm',
   },
   {
@@ -77,7 +77,7 @@ export const GOPUFF_CATEGORIES: CategoryItem[] = [
   {
     id: 'ice-cream',
     label: 'Ice Cream',
-    bgColor: '#0284C7',
+    bgColor: '#8000FF',
     type: 'ice_cream',
   },
 ];

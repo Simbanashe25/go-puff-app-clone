@@ -2,9 +2,9 @@ import { Platform } from 'react-native';
 
 export const GOPUFF_COLORS = {
   primary: '#8000FF',
-  primaryHover: '#008ae6',
-  action: '#1010F5',
-  actionHover: '#0909C9',
+  primaryHover: '#6A00D9',
+  action: '#8000FF',
+  actionHover: '#5A00B8',
   success: '#00875A',
   discount: '#4BE39A',
   promoYellow: '#FFF0B3',

@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react';
 import {
-  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -12,6 +11,7 @@ import {
 import { Feather, Ionicons } from '@expo/vector-icons';
 import { BagItem } from './BagScreen';
 import { TopNav } from './TopNav';
+import { LoadingImage } from './LoadingImage';
 import { Product } from '../data/products';
 import {
   GOPUFF_COLORS,
@@ -163,7 +163,7 @@ export const CheckoutScreen: React.FC<CheckoutScreenProps> = ({
                 <View key={item.product.id} style={styles.orderRow}>
                   <Text style={styles.orderQuantity}>{item.quantity}x</Text>
                   <Text style={styles.orderName} numberOfLines={1}>{item.product.name.replace(/\n/g, ' ')}</Text>
-                  <Image source={item.product.imageSource} style={styles.orderImage} resizeMode="contain" />
+                  <LoadingImage source={item.product.imageSource} containerStyle={styles.orderImage} resizeMode="contain" />
                   <Text style={styles.orderPrice}>${(item.product.price * item.quantity).toFixed(2)}</Text>
                 </View>
               ))}
@@ -250,10 +250,10 @@ const styles = StyleSheet.create({
   totalValue: { fontFamily: GOPUFF_FONTS.black, fontSize: 22, fontWeight: '900', color: GOPUFF_COLORS.action },
   placeButton: { height: 62, borderRadius: GOPUFF_RADII.pill, backgroundColor: GOPUFF_COLORS.action, alignItems: 'center', justifyContent: 'center', marginTop: GOPUFF_SPACING.lg },
   buttonText: { fontFamily: GOPUFF_FONTS.black, fontSize: 17, fontWeight: '900', fontStyle: 'italic', color: GOPUFF_COLORS.white },
-  savingsCard: { backgroundColor: GOPUFF_COLORS.infoBackground, borderRadius: GOPUFF_RADII.lg, padding: GOPUFF_SPACING.xl, marginTop: GOPUFF_SPACING.xl },
-  savingsTitle: { fontFamily: GOPUFF_FONTS.family, fontSize: 28, fontWeight: '900', fontStyle: 'italic', color: GOPUFF_COLORS.grayText },
-  savingsText: { fontFamily: GOPUFF_FONTS.regular, fontSize: 15, lineHeight: 22, color: GOPUFF_COLORS.grayText, marginTop: GOPUFF_SPACING.sm },
-  famText: { fontFamily: GOPUFF_FONTS.black, color: '#0872B9' },
+  savingsCard: { backgroundColor: '#4B4B4B', borderRadius: GOPUFF_RADII.lg, padding: GOPUFF_SPACING.xl, marginTop: GOPUFF_SPACING.xl },
+  savingsTitle: { fontFamily: GOPUFF_FONTS.family, fontSize: 28, fontWeight: '900', fontStyle: 'italic', color: GOPUFF_COLORS.white },
+  savingsText: { fontFamily: GOPUFF_FONTS.regular, fontSize: 15, lineHeight: 22, color: GOPUFF_COLORS.white, marginTop: GOPUFF_SPACING.sm },
+  famText: { fontFamily: GOPUFF_FONTS.black, color: GOPUFF_COLORS.white },
   joinButton: { alignSelf: 'flex-start', backgroundColor: GOPUFF_COLORS.action, paddingHorizontal: 22, paddingVertical: 9, borderRadius: GOPUFF_RADII.pill, marginTop: 15 },
   joinText: { color: GOPUFF_COLORS.white, fontFamily: GOPUFF_FONTS.family, fontSize: 14, fontWeight: '900', fontStyle: 'italic' },
   mobileBar: { position: 'absolute', left: 0, right: 0, bottom: 0, padding: GOPUFF_SPACING.md, backgroundColor: GOPUFF_COLORS.white, borderTopWidth: 1, borderTopColor: GOPUFF_COLORS.borderLight, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', ...GOPUFF_SHADOWS.card },

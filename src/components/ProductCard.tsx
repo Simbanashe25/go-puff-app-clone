@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Platform,
   Animated,
+  useWindowDimensions,
 } from 'react-native';
 import { Product } from '../data/products';
 import { GOPUFF_FONTS } from '../constants/theme';
@@ -28,6 +29,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onRemoveFromCart,
   onPress,
 }) => {
+  const { width } = useWindowDimensions();
+  const isDesktop = width >= 768;
   const [quantity, setQuantity] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
   const scaleAnim = React.useRef(new Animated.Value(1)).current;
@@ -143,25 +146,31 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
       {/* 2. Text Content Area with Sharp Native Typography */}
       <View style={styles.contentArea}>
-        {/* Crisp Product Title (Exactly 2 lines) */}
-        <Text numberOfLines={2} style={styles.titleText}>
-          {product.name}
-        </Text>
-
-        {/* Price Row: Green Sale Price + Strikethrough Original Price */}
-        <View style={styles.priceRow}>
-          <Text style={[styles.salePrice, !isDiscounted && styles.regularPrice]}>
-            ${product.price.toFixed(2)}
-          </Text>
-          {isDiscounted && (
-            <Text style={styles.originalPrice}>
-              ${product.originalPrice.toFixed(2)}
+        {isDesktop && !imageLoaded ? (
+          <View style={styles.contentSkeleton}>
+            <LoadingSkeleton style={styles.titleSkeleton} />
+            <LoadingSkeleton style={styles.titleSkeletonShort} />
+            <LoadingSkeleton style={styles.priceSkeleton} />
+            <LoadingSkeleton style={styles.unitSkeleton} />
+          </View>
+        ) : (
+          <>
+            <Text numberOfLines={2} style={styles.titleText}>
+              {product.name}
             </Text>
-          )}
-        </View>
-
-        {/* Unit & Per-Piece Info */}
-        <Text style={styles.unitInfoText}>{product.unitInfo}</Text>
+            <View style={styles.priceRow}>
+              <Text style={[styles.salePrice, !isDiscounted && styles.regularPrice]}>
+                ${product.price.toFixed(2)}
+              </Text>
+              {isDiscounted && (
+                <Text style={styles.originalPrice}>
+                  ${product.originalPrice.toFixed(2)}
+                </Text>
+              )}
+            </View>
+            <Text style={styles.unitInfoText}>{product.unitInfo}</Text>
+          </>
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -207,7 +216,7 @@ const styles = StyleSheet.create({
   },
   imageSkeleton: {
     ...StyleSheet.absoluteFillObject,
-    margin: 10,
+    margin: 4,
     borderRadius: 12,
     zIndex: 1,
   },
@@ -306,7 +315,7 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     fontWeight: '900',
     fontStyle: 'italic',
-    color: '#1117F5',
+    color: '#8000FF',
   },
   qtyBadge: {
     position: 'absolute',
@@ -337,6 +346,31 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderBottomLeftRadius: 14,
     borderBottomRightRadius: 14,
+  },
+  contentSkeleton: {
+    gap: 8,
+    paddingTop: 2,
+  },
+  titleSkeleton: {
+    width: '100%',
+    height: 10,
+    borderRadius: 4,
+  },
+  titleSkeletonShort: {
+    width: '76%',
+    height: 10,
+    borderRadius: 4,
+  },
+  priceSkeleton: {
+    width: '48%',
+    height: 11,
+    borderRadius: 4,
+    marginTop: 4,
+  },
+  unitSkeleton: {
+    width: '64%',
+    height: 8,
+    borderRadius: 4,
   },
   titleText: {
     fontFamily: GOPUFF_FONTS.family,

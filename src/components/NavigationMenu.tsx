@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
   signInButton: {
     height: 52,
     borderRadius: 30,
-    backgroundColor: '#1010F5',
+    backgroundColor: '#8000FF',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,

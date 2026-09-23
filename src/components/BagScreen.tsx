@@ -14,6 +14,7 @@ import { Product } from '../data/products';
 import { GOPUFF_FONTS } from '../constants/theme';
 import { ProductCard } from './ProductCard';
 import { GiftModal } from './GiftModal';
+import { LoadingImage } from './LoadingImage';
 
 const TRASH_ICON = require('../../assets/icons/trash (2).svg');
 const PLUS_ICON = require('../../assets/icons/plus (2).svg');
@@ -185,7 +186,7 @@ const BagItemRow: React.FC<{
           <Text style={styles.dealLink}>Shop more deals ›</Text>
         </View>
       </TouchableOpacity>
-      <Image source={product.imageSource} style={styles.itemImage} resizeMode="contain" />
+      <LoadingImage source={product.imageSource} containerStyle={styles.itemImage} resizeMode="contain" />
       <View style={[styles.quantityPill, isMobile && styles.quantityPillMobile]}>
         <TouchableOpacity onPress={() => onRemove(product)} style={[styles.quantityButton, isMobile && styles.quantityButtonMobile]}>
           {quantity === 1 ? <Image source={TRASH_ICON} style={styles.trashIcon} /> : <Text style={styles.minus}>−</Text>}
@@ -217,7 +218,7 @@ const styles = StyleSheet.create({
   emptyState: { alignItems: 'center', paddingVertical: 52 },
   emptyTitle: { fontFamily: GOPUFF_FONTS.family, fontSize: 19, fontWeight: '900', fontStyle: 'italic' },
   emptyText: { fontFamily: GOPUFF_FONTS.family, fontSize: 13, color: '#666666', marginTop: 8 },
-  continueButton: { backgroundColor: '#1111EE', borderRadius: 24, paddingHorizontal: 26, paddingVertical: 12, marginTop: 18 },
+  continueButton: { backgroundColor: '#8000FF', borderRadius: 24, paddingHorizontal: 26, paddingVertical: 12, marginTop: 18 },
   continueButtonText: { color: '#FFFFFF', fontFamily: GOPUFF_FONTS.family, fontSize: 13, fontWeight: '900', fontStyle: 'italic' },
   itemRow: { minHeight: 132, borderBottomWidth: 1, borderBottomColor: '#E5E7EB', position: 'relative', paddingVertical: 20, paddingRight: 160 },
   itemInfo: { flex: 1 },
@@ -234,20 +235,20 @@ const styles = StyleSheet.create({
   quantityButtonMobile: { width: 24, height: 30 },
   trashIcon: { width: 17, height: 17 },
   bagPlus: { width: 19, height: 19 },
-  minus: { fontSize: 24, color: '#1111EE', lineHeight: 24 },
-  quantity: { fontFamily: GOPUFF_FONTS.family, color: '#1111EE', fontSize: 23, fontWeight: '900', fontStyle: 'italic' },
+  minus: { fontSize: 24, color: '#8000FF', lineHeight: 24 },
+  quantity: { fontFamily: GOPUFF_FONTS.family, color: '#8000FF', fontSize: 23, fontWeight: '900', fontStyle: 'italic' },
   summaryCard: { paddingTop: 18 },
   summaryRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   summaryLabel: { fontFamily: GOPUFF_FONTS.family, fontSize: 26, fontWeight: '700' },
   summaryValue: { fontFamily: GOPUFF_FONTS.family, fontSize: 25, fontWeight: '700' },
   divider: { height: 1, backgroundColor: '#E5E7EB', marginVertical: 34 },
-  checkoutButton: { height: 52, borderRadius: 27, backgroundColor: '#1111EE', alignItems: 'center', justifyContent: 'center' },
+  checkoutButton: { height: 52, borderRadius: 27, backgroundColor: '#8000FF', alignItems: 'center', justifyContent: 'center' },
   checkoutText: { color: '#FFFFFF', fontFamily: GOPUFF_FONTS.family, fontSize: 19, fontWeight: '900', fontStyle: 'italic' },
-  savingsCard: { backgroundColor: '#8000FF', borderRadius: 20, padding: 20, marginTop: 20, minHeight: 152 },
-  savingsTitle: { fontFamily: GOPUFF_FONTS.family, color: '#4B4B4B', fontSize: 28, fontWeight: '900', fontStyle: 'italic' },
-  savingsText: { fontFamily: GOPUFF_FONTS.family, color: '#4B5563', fontSize: 17, marginTop: 9 },
-  famText: { color: '#0567B3', fontWeight: '900', fontStyle: 'italic' },
-  joinButton: { alignSelf: 'flex-start', backgroundColor: '#1111EE', paddingHorizontal: 22, paddingVertical: 9, borderRadius: 21, marginTop: 15 },
+  savingsCard: { backgroundColor: '#4B4B4B', borderRadius: 20, padding: 20, marginTop: 20, minHeight: 152 },
+  savingsTitle: { fontFamily: GOPUFF_FONTS.family, color: '#FFFFFF', fontSize: 28, fontWeight: '900', fontStyle: 'italic' },
+  savingsText: { fontFamily: GOPUFF_FONTS.family, color: '#FFFFFF', fontSize: 17, marginTop: 9 },
+  famText: { color: '#FFFFFF', fontWeight: '900', fontStyle: 'italic' },
+  joinButton: { alignSelf: 'flex-start', backgroundColor: '#8000FF', paddingHorizontal: 22, paddingVertical: 9, borderRadius: 21, marginTop: 15 },
   joinText: { color: '#FFFFFF', fontFamily: GOPUFF_FONTS.family, fontSize: 14, fontWeight: '900', fontStyle: 'italic' },
   recommendations: { marginTop: 30 },
   emptyRecommendations: { width: '100%', marginTop: 42, alignSelf: 'stretch' },
@@ -259,5 +260,5 @@ const styles = StyleSheet.create({
   mobileCheckoutBar: { position: 'absolute', left: 0, right: 0, bottom: 68, minHeight: 78, paddingHorizontal: 18, paddingVertical: 10, backgroundColor: '#FFFFFF', borderTopWidth: 1, borderTopColor: '#E5E7EB', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 14, zIndex: 19, ...Platform.select({ web: { position: 'fixed' as any, boxShadow: '0 -3px 12px rgba(15, 23, 42, 0.14)' } as any }) },
   mobileSubtotalLabel: { fontFamily: GOPUFF_FONTS.family, fontSize: 13, color: '#555555' },
   mobileSubtotalValue: { fontFamily: GOPUFF_FONTS.family, fontSize: 20, fontWeight: '800', marginTop: 2 },
-  mobileCheckoutButton: { flex: 1, maxWidth: 250, height: 48, borderRadius: 25, backgroundColor: '#1111EE', alignItems: 'center', justifyContent: 'center' },
+  mobileCheckoutButton: { flex: 1, maxWidth: 250, height: 48, borderRadius: 25, backgroundColor: '#8000FF', alignItems: 'center', justifyContent: 'center' },
 });

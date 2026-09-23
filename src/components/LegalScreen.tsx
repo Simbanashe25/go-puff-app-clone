@@ -11,7 +11,7 @@ export const LegalScreen: React.FC<Props> = ({ title, onBack }) => (
     <TouchableOpacity style={styles.back} onPress={onBack}><Feather name="arrow-left" size={20} color={GOPUFF_COLORS.black} /><Text style={styles.backText}>BACK TO SHOPPING</Text></TouchableOpacity>
     <Text style={styles.title}>{title.toUpperCase()}.</Text>
     <Text style={styles.updated}>Last updated: September 2026</Text>
-    {sections.map((section, index) => <View key={section} style={styles.section}><Text style={styles.heading}>{section}</Text><Text style={styles.body}>{index === 0 ? 'We collect information you provide when you create an account, place an order, choose a delivery location or contact support.' : index === 1 ? 'We use information to process orders, provide delivery services, improve the app and communicate important updates.' : index === 2 ? 'You can review, update or request deletion of your personal information by contacting support.' : 'For questions about this policy, please contact the Gopuff support team through the Help & Support page.'}</Text></View>)}
+    {sections.map((section, index) => <View key={section} style={styles.section}><Text style={styles.heading}>{section}</Text><Text style={styles.body}>{index === 0 ? 'We collect information you provide when you create an account, place an order, choose a delivery location or contact support.' : index === 1 ? 'We use information to process orders, provide delivery services, improve the app and communicate important updates.' : index === 2 ? 'You can review, update or request deletion of your personal information by contacting support.' : 'For questions about this policy, please contact the Now Now support team through the Help & Support page.'}</Text></View>)}
   </ScrollView></View>
 );
 

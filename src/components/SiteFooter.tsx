@@ -10,7 +10,7 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { GOPUFF_FONTS } from '../constants/theme';
+import { GOPUFF_FONTS, GOPUFF_SIZES } from '../constants/theme';
 
 const APP_LOGO = require('../../assets/logo/now now logo.png');
 
@@ -41,13 +41,13 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({
       <View style={[styles.intro, isMobile && styles.introMobile]}>
         <Image source={APP_LOGO} style={styles.logo} resizeMode="cover" />
         <Text style={[styles.description, isMobile && styles.descriptionMobile]}>
-          Gopuff delivers groceries, snacks, alcohol, household essentials and more in just 15 minutes.
+          Now Now delivers groceries, snacks, alcohol, household essentials and more in just 15 minutes.
         </Text>
         <Text style={[styles.prompt, isMobile && styles.promptMobile]}>
           LET&apos;S GET MOVING. DROP YOUR MOBILE NUMBER TO START YOUR ORDER OR PICK UP WHERE YOU LEFT OFF.
         </Text>
         <View style={[styles.signInRow, isMobile && styles.signInRowMobile]}>
-          <View style={styles.phoneInput}>
+          <View style={[styles.phoneInput, isMobile && styles.phoneInputMobile]}>
             <Feather name="phone" size={24} color="#111111" />
             <TouchableOpacity
               style={styles.countryButton}
@@ -65,7 +65,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({
               style={styles.phoneTextInput}
             />
           </View>
-          <TouchableOpacity style={styles.signInCta} onPress={onSignInPress}>
+          <TouchableOpacity style={[styles.signInCta, isMobile && styles.signInCtaMobile]} onPress={onSignInPress}>
             <Text style={styles.signInCtaText}>SIGN IN / SIGN UP</Text>
           </TouchableOpacity>
         </View>
@@ -73,7 +73,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({
 
       <View style={[styles.serviceBlock, isMobile && styles.serviceBlockMobile]}>
         <Text style={styles.serviceText}>
-          Gopuff delivers to over 1,000 cities across the United States (US) and United Kingdom (UK). Major cities include:{' '}
+          Now Now delivers to over 1,000 cities across the United States (US) and United Kingdom (UK). Major cities include:{' '}
           {CITIES.map((city, index) => (
             <Text
               key={city}
@@ -175,6 +175,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     gap: 16,
   },
+  phoneInputMobile: {
+    width: '100%',
+    minWidth: 0,
+    height: GOPUFF_SIZES.largeControlHeight,
+  },
   countryButton: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -201,6 +206,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#1717F5',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  signInCtaMobile: {
+    width: '100%',
+    minWidth: 0,
+    height: GOPUFF_SIZES.largeControlHeight,
   },
   signInCtaText: {
     fontFamily: GOPUFF_FONTS.family,

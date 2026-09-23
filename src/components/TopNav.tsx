@@ -136,7 +136,11 @@ export const TopNav: React.FC<TopNavProps> = ({
             onPress={onLogoPress}
             accessibilityLabel="Go to home"
           >
-            <Image source={APP_LOGO} style={styles.logoImage} resizeMode="cover" />
+            <Image
+              source={APP_LOGO}
+              style={[styles.logoImage, isMobile && styles.logoImageMobile]}
+              resizeMode="cover"
+            />
           </TouchableOpacity>
         </View>
 
@@ -190,7 +194,7 @@ export const TopNav: React.FC<TopNavProps> = ({
             isMobile && styles.searchInputMobile,
             isMobile && isFocused && styles.searchInputMobileFocused,
           ]}
-            placeholder="Search Gopuff"
+            placeholder="Search Now Now"
             placeholderTextColor={GOPUFF_COLORS.placeholder}
             value={searchValue}
             onChangeText={handleSearchTextChange}
@@ -383,7 +387,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '900',
     fontStyle: 'italic',
-    color: '#1010F5',
+    color: '#8000FF',
   },
   mobileDeliveryDot: {
     fontFamily: GOPUFF_FONTS.family,
@@ -528,8 +532,8 @@ const styles = StyleSheet.create({
   logoContainerMobile: {
     position: 'absolute',
     left: '50%',
-    width: 76,
-    marginLeft: -38,
+    width: 136,
+    marginLeft: -68,
     marginRight: 0,
     alignItems: 'center',
   },
@@ -546,8 +550,13 @@ const styles = StyleSheet.create({
     }),
   },
   logoImage: {
-    width: 112,
-    height: 34,
+    width: 150,
+    height: 42,
+    alignSelf: 'center',
+  },
+  logoImageMobile: {
+    width: 136,
+    height: 38,
   },
   searchBarWrapper: {
     flex: 1,

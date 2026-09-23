@@ -77,7 +77,7 @@ export const CategoryCircle: React.FC<CategoryCircleProps> = ({
             <Defs>
               <RadialGradient id="apmBg" cx="50%" cy="45%" r="60%">
                 <Stop offset="0%" stopColor="#1E3272" />
-                <Stop offset="70%" stopColor="#0B1B4F" />
+                <Stop offset="70%" stopColor="#2B005C" />
                 <Stop offset="100%" stopColor="#050E2D" />
               </RadialGradient>
               <RadialGradient id="floorShadow2" cx="50%" cy="50%" r="50%">
@@ -347,7 +347,7 @@ export const CategoryCircle: React.FC<CategoryCircleProps> = ({
         // Ben & Jerry's pint on ocean blue
         return (
           <Svg width={size} height={size} viewBox="0 0 60 60">
-            <Circle cx="30" cy="30" r="30" fill="#0284C7" />
+            <Circle cx="30" cy="30" r="30" fill="#8000FF" />
             <Ellipse cx="30" cy="51" rx="12" ry="3.5" fill="rgba(0,0,0,0.2)" />
             {/* Tub body */}
             <Polygon

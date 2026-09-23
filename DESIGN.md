@@ -1,4 +1,4 @@
-# GoPuff App Design System
+# Now Now App Design System
 
 This document is the source of truth for new screens and components in this app. Reuse the tokens in [`src/constants/theme.ts`](./src/constants/theme.ts) instead of introducing one-off colors, spacing, radii, or control sizes.
 
@@ -18,7 +18,7 @@ The interface is fast, friendly, bold, and delivery-focused:
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `GOPUFF_COLORS.action` | `#1010F5` | Primary buttons, selected actions, checkout |
+| `GOPUFF_COLORS.action` | `#8000FF` | Primary buttons, selected actions, checkout |
 | `GOPUFF_COLORS.primary` | `#8000FF` | Accent actions and active input borders |
 | `GOPUFF_COLORS.black` | `#111111` | Primary text and icons |
 | `GOPUFF_COLORS.grayText` | `#666666` | Supporting text |

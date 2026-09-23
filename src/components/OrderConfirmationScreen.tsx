@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { BagItem } from './BagScreen';
 import { GOPUFF_COLORS, GOPUFF_FONTS, GOPUFF_RADII, GOPUFF_SIZES, GOPUFF_SPACING } from '../constants/theme';
+import { LoadingImage } from './LoadingImage';
 
 interface Props {
   items: BagItem[];
@@ -31,7 +32,7 @@ export const OrderConfirmationScreen: React.FC<Props> = ({ items, total, orderNu
           <View key={item.product.id} style={styles.itemRow}>
             <Text style={styles.quantity}>{item.quantity}x</Text>
             <Text style={styles.itemName} numberOfLines={1}>{item.product.name.replace(/\n/g, ' ')}</Text>
-            <Image source={item.product.imageSource} style={styles.itemImage} resizeMode="contain" />
+            <LoadingImage source={item.product.imageSource} containerStyle={styles.itemImage} resizeMode="contain" />
             <Text style={styles.price}>${(item.product.price * item.quantity).toFixed(2)}</Text>
           </View>
         ))}

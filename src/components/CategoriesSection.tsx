@@ -3,10 +3,10 @@ import {
   StyleSheet,
   View,
   Text,
-  Image,
   ScrollView,
   TouchableOpacity,
   Platform,
+  useWindowDimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { GOPUFF_CATEGORIES, CategoryItem } from '../data/categories';
@@ -15,6 +15,7 @@ import { GOPUFF_FONTS } from '../constants/theme';
 import { CategoryCircle } from './CategoryCircle';
 import { LinearGradient } from 'expo-linear-gradient';
 import { HERO_BANNERS_DATA } from '../data/banners';
+import { LoadingImage } from './LoadingImage';
 
 interface CategoriesSectionProps {
   onSelectCategory?: (category: CategoryItem) => void;
@@ -35,13 +36,15 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({
   onStayTunedPress,
   onBannerPress,
 }) => {
+  const { width } = useWindowDimensions();
+  const isMobile = width < 768;
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(true);
   const [activeTab, setActiveTab] = useState<'categories' | 'deals'>('categories');
 
   return (
     <View style={styles.container}>
       {/* 1. Sub-nav Header Row matching screenshot */}
-      <View style={styles.subHeaderRow}>
+      <View style={[styles.subHeaderRow, isMobile && styles.subHeaderRowMobile]}>
         {/* Left Side: "Shop Categories ^" & "Deals v" */}
         <View style={styles.leftNavGroup}>
           <TouchableOpacity
@@ -67,7 +70,7 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({
 
           <TouchableOpacity
             activeOpacity={0.7}
-            style={[styles.dropdownButton, styles.dealsButton]}
+            style={[styles.dropdownButton, styles.dealsButton, isMobile && styles.dealsButtonMobile]}
             onPress={() => setActiveTab(activeTab === 'deals' ? 'categories' : 'deals')}
           >
             <Text
@@ -88,11 +91,11 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({
         </View>
 
         {/* Right Side: "(clock) STAY TUNED" • "SUSSEX v" */}
-        <View style={styles.rightNavGroup}>
+        <View style={[styles.rightNavGroup, isMobile && styles.rightNavGroupMobile]}>
           {/* STAY TUNED Pill Badge */}
           <TouchableOpacity
             activeOpacity={0.8}
-            style={styles.stayTunedBadge}
+            style={[styles.stayTunedBadge, isMobile && styles.stayTunedBadgeMobile]}
             onPress={onStayTunedPress}
           >
             <Ionicons
@@ -203,9 +206,9 @@ const PromoBanner: React.FC<PromoBannerProps> = ({ banner, onPress }) => (
     style={styles.promoBanner}
     onPress={() => onPress && onPress(banner.id)}
   >
-    <Image
+    <LoadingImage
       source={{ uri: banner.imageUrl }}
-      style={styles.promoBannerImage}
+      containerStyle={styles.promoBannerImage}
       resizeMode="cover"
     />
     <LinearGradient
@@ -235,6 +238,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginBottom: 16,
   },
+  subHeaderRowMobile: {
+    paddingHorizontal: 12,
+    marginBottom: 12,
+    alignItems: 'flex-start',
+  },
   leftNavGroup: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -246,6 +254,9 @@ const styles = StyleSheet.create({
   },
   dealsButton: {
     marginLeft: 26,
+  },
+  dealsButtonMobile: {
+    marginLeft: 16,
   },
   navButtonText: {
     fontFamily: GOPUFF_FONTS.regular,
@@ -263,6 +274,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  rightNavGroupMobile: {
+    flexShrink: 1,
+    marginLeft: 10,
+  },
   stayTunedBadge: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -270,6 +285,9 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 12,
     borderRadius: 9999,
+  },
+  stayTunedBadgeMobile: {
+    paddingHorizontal: 8,
   },
   clockIcon: {
     marginRight: 6,

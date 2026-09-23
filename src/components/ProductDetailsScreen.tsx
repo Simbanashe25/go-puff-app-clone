@@ -14,6 +14,7 @@ import { NutritionRow, Product } from '../data/products';
 import { GOPUFF_FONTS } from '../constants/theme';
 import { ProductsSection } from './ProductsSection';
 import { TopNav } from './TopNav';
+import { LoadingImage } from './LoadingImage';
 
 const SHOPPING_BAG_ICON = require('../../assets/icons/shopping-bag (3).svg');
 const PLUS_ICON = require('../../assets/icons/plus (2).svg');
@@ -120,18 +121,20 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({
         <View style={[styles.productLayout, isMobile && styles.productLayoutMobile]}>
           <View style={[styles.galleryColumn, isMobile && styles.galleryColumnMobile]}>
             <View style={[styles.mainImageFrame, isMobile && styles.mainImageFrameMobile]}>
-              <Image
+              <LoadingImage
                 source={product.imageSource}
                 resizeMode="contain"
-                style={styles.mainImage}
+                imageStyle={styles.mainImage}
+                containerStyle={styles.mainImageFrame}
               />
             </View>
             <View style={[styles.thumbnailRow, isMobile && styles.thumbnailRowMobile]}>
               <View style={[styles.thumbnailActive, isMobile && styles.thumbnailMobile]}>
-                <Image
+                <LoadingImage
                   source={product.imageSource}
                   resizeMode="contain"
-                  style={styles.thumbnailImage}
+                  imageStyle={styles.thumbnailImage}
+                  containerStyle={styles.thumbnailActive}
                 />
               </View>
               <View style={[styles.thumbnailPlaceholder, isMobile && styles.thumbnailMobile]}>
@@ -573,7 +576,7 @@ const styles = StyleSheet.create({
   },
   detailsQuantityText: {
     fontFamily: GOPUFF_FONTS.family,
-    color: '#1111EE',
+    color: '#8000FF',
     fontSize: 28,
     fontWeight: '900',
     fontStyle: 'italic',
@@ -582,7 +585,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 56,
     borderRadius: 30,
-    backgroundColor: '#1111EE',
+    backgroundColor: '#8000FF',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

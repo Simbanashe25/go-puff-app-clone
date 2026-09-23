@@ -246,7 +246,7 @@ const LocationRow: React.FC<{
       <Text style={styles.locationAddress}>{location.address}</Text>
       <Text style={styles.locationDelivery}>{location.delivery}</Text>
     </View>
-    {selected && <Feather name="check" size={25} color="#1010F5" />}
+    {selected && <Feather name="check" size={25} color="#8000FF" />}
   </TouchableOpacity>
 );
 
@@ -284,6 +284,6 @@ const styles = StyleSheet.create({
   saveAsRow: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 16 },
   saveAsText: { fontFamily: GOPUFF_FONTS.family, fontSize: 17, color: '#555555' },
   saveChip: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 18, paddingVertical: 11, borderRadius: 24, backgroundColor: '#FFFFFF', ...Platform.select({ web: { boxShadow: '0 3px 12px rgba(0,0,0,0.12)' } as any }) },
-  saveButton: { height: 54, borderRadius: 28, backgroundColor: '#1010F5', alignItems: 'center', justifyContent: 'center', marginTop: 8 },
+  saveButton: { height: 54, borderRadius: 28, backgroundColor: '#8000FF', alignItems: 'center', justifyContent: 'center', marginTop: 8 },
   saveButtonText: { fontFamily: GOPUFF_FONTS.family, fontSize: 19, fontWeight: '900', fontStyle: 'italic', color: '#FFFFFF' },
 });

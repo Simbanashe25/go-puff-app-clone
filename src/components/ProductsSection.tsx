@@ -5,6 +5,7 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
+  useWindowDimensions,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Product, EXACT_CAROUSEL_PRODUCTS } from '../data/products';
@@ -35,13 +36,15 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
   itemCount,
 }) => {
   const scrollRef = useRef<ScrollView>(null);
+  const { width } = useWindowDimensions();
+  const isMobile = width < 768;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isMobile && styles.containerMobile]}>
       {/* 1. Header Row */}
-      <View style={styles.headerRow}>
+      <View style={[styles.headerRow, isMobile && styles.headerRowMobile]}>
         <View style={styles.titleColumn}>
-          <Text style={styles.sectionTitle}>{title}</Text>
+          <Text numberOfLines={2} style={[styles.sectionTitle, isMobile && styles.sectionTitleMobile]}>{title}</Text>
         </View>
 
         <View style={styles.headerRightControls}>
@@ -50,7 +53,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
             onPress={onSeeAllPress}
             style={styles.seeAllButton}
           >
-            <Text style={[styles.seeAllText, itemCount !== undefined && styles.itemCountText]}>
+            <Text style={[styles.seeAllText, itemCount !== undefined && styles.itemCountText, isMobile && styles.itemCountTextMobile]}>
               {itemCount !== undefined ? `${itemCount} ITEMS` : seeAllLabel}
             </Text>
             <Feather
@@ -68,7 +71,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
         ref={scrollRef}
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[styles.scrollContent, isMobile && styles.scrollContentMobile]}
         style={styles.scrollView}
       >
         {products.map((product) => (
@@ -91,6 +94,9 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     backgroundColor: '#FFFFFF',
   },
+  containerMobile: {
+    paddingVertical: 14,
+  },
   headerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -111,6 +117,14 @@ const styles = StyleSheet.create({
     color: '#0F172A',
     letterSpacing: -0.3,
     textTransform: 'uppercase',
+  },
+  sectionTitleMobile: {
+    fontSize: 18,
+    lineHeight: 21,
+  },
+  headerRowMobile: {
+    paddingHorizontal: 12,
+    marginBottom: 8,
   },
   sectionSubtitle: {
     fontFamily: GOPUFF_FONTS.family,
@@ -141,6 +155,9 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     fontSize: 18,
   },
+  itemCountTextMobile: {
+    fontSize: 14,
+  },
   scrollView: {
     flexGrow: 0,
   },
@@ -151,6 +168,11 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     gap: 12,
     maxWidth: 1240,
+  },
+  scrollContentMobile: {
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    gap: 10,
   },
   cardItemWrapper: {
     marginRight: 2,

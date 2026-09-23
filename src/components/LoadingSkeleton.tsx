@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { Animated, Platform, StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 interface LoadingSkeletonProps {
   style?: StyleProp<ViewStyle>;
@@ -14,12 +14,12 @@ export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({ style }) => {
         Animated.timing(opacity, {
           toValue: 0.9,
           duration: 700,
-          useNativeDriver: true,
+          useNativeDriver: Platform.OS !== 'web',
         }),
         Animated.timing(opacity, {
           toValue: 0.45,
           duration: 700,
-          useNativeDriver: true,
+          useNativeDriver: Platform.OS !== 'web',
         }),
       ]),
     );
@@ -33,6 +33,6 @@ export const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({ style }) => {
 const styles = StyleSheet.create({
   base: {
     backgroundColor: '#E5E7EB',
-    borderRadius: 8,
+    borderRadius: 6,
   },
 });

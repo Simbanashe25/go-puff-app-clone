@@ -28,7 +28,7 @@ export const AccountScreen: React.FC<Props> = ({ signedIn, profile, onBack, onSi
           <View style={styles.profileIdentity}>
             <View style={styles.avatar}><Feather name="user" size={28} color={GOPUFF_COLORS.white} /></View>
             <View style={styles.flex}>
-              <Text style={styles.cardTitle}>{signedIn ? profile?.name : 'Welcome to Gopuff'}</Text>
+              <Text style={styles.cardTitle}>{signedIn ? profile?.name : 'Welcome to Now Now'}</Text>
               <Text style={styles.body}>{signedIn ? profile?.email : 'Sign in to manage your orders, addresses and preferences.'}</Text>
             </View>
           </View>

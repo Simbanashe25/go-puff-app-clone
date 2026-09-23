@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   removeLink: { alignSelf: 'flex-start', marginTop: 6 },
   removeText: { fontFamily: GOPUFF_FONTS.family, fontSize: 19, color: '#555555', textDecorationLine: 'underline' },
   footer: { padding: 16, borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: '#E5E7EB' },
-  saveButton: { height: 56, borderRadius: 30, backgroundColor: '#1010F5', alignItems: 'center', justifyContent: 'center' },
+  saveButton: { height: 56, borderRadius: 30, backgroundColor: '#8000FF', alignItems: 'center', justifyContent: 'center' },
   saveText: { fontFamily: GOPUFF_FONTS.family, fontSize: 20, fontWeight: '900', fontStyle: 'italic', color: '#FFFFFF' },
   removeButton: { alignItems: 'center', paddingTop: 16, paddingBottom: 4 },
   removeButtonText: { fontFamily: GOPUFF_FONTS.family, fontSize: 18, fontWeight: '900', fontStyle: 'italic', color: '#777777' },

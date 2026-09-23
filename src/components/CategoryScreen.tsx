@@ -113,7 +113,11 @@ export const CategoryScreen: React.FC<CategoryScreenProps> = ({
                 <Text style={[styles.sidebarItemText, item === selectedSubcategory && styles.sidebarItemTextActive]}>
                   {item}
                 </Text>
-                {item === selectedSubcategory && <Ionicons name="chevron-up" size={18} color="#111111" />}
+                <Ionicons
+                  name={item === selectedSubcategory ? 'chevron-up' : 'chevron-down'}
+                  size={18}
+                  color="#111111"
+                />
               </TouchableOpacity>
             ))}
           </View>}
@@ -263,7 +267,7 @@ const FilterSheet: React.FC<{
       : activeFilter === 'category'
         ? ['Fruit & Veg', 'Eggs & Dairy', 'Bakery', 'Meat & Fish']
         : activeFilter === 'brands'
-            ? ['Morrisons', 'GoPuff', 'Aldi Price Match']
+            ? ['Morrisons', 'Now Now', 'Aldi Price Match']
             : activeFilter === 'show in stock'
               ? ['Show in stock only']
               : activeFilter === 'deals'
@@ -441,6 +445,6 @@ const styles = StyleSheet.create({
   desktopSheetActions: { left: 23, right: 23, bottom: 16 },
   clearButton: { flex: 1, height: 49, borderRadius: 25, borderWidth: 2, borderColor: '#C7C7C7', alignItems: 'center', justifyContent: 'center' },
   clearButtonText: { fontFamily: GOPUFF_FONTS.family, fontSize: 16, fontWeight: '900', fontStyle: 'italic', color: '#AAAAAA' },
-  resultsButton: { flex: 1, height: 49, borderRadius: 25, backgroundColor: '#1010F5', alignItems: 'center', justifyContent: 'center' },
+  resultsButton: { flex: 1, height: 49, borderRadius: 25, backgroundColor: '#8000FF', alignItems: 'center', justifyContent: 'center' },
   resultsButtonText: { fontFamily: GOPUFF_FONTS.family, fontSize: 16, fontWeight: '900', fontStyle: 'italic', color: '#FFFFFF' },
 });
