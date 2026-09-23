@@ -7,7 +7,7 @@ This document is the source of truth for new screens and components in this app.
 The interface is fast, friendly, bold, and delivery-focused:
 
 - Use generous white space and high-contrast black typography.
-- Use electric blue for primary actions and important navigation states.
+- Use mint green for primary accents and important navigation states.
 - Use rounded cards and pill-shaped controls.
 - Keep product browsing visual: packshots, short labels, and horizontal carousels.
 - Prefer concise uppercase or italic-black labels for major actions and section headings.
@@ -19,13 +19,13 @@ The interface is fast, friendly, bold, and delivery-focused:
 | Token | Value | Use |
 | --- | --- | --- |
 | `GOPUFF_COLORS.action` | `#1010F5` | Primary buttons, selected actions, checkout |
-| `GOPUFF_COLORS.primary` | `#00A3FF` | Accent actions and active input borders |
+| `GOPUFF_COLORS.primary` | `#8000FF` | Accent actions and active input borders |
 | `GOPUFF_COLORS.black` | `#111111` | Primary text and icons |
 | `GOPUFF_COLORS.grayText` | `#666666` | Supporting text |
 | `GOPUFF_COLORS.mutedText` | `#777777` | Secondary labels and metadata |
 | `GOPUFF_COLORS.borderLight` | `#E5E7EB` | Dividers and subtle borders |
-| `GOPUFF_COLORS.selectedBackground` | `#E2F4FD` | Selected navigation/filter rows |
-| `GOPUFF_COLORS.infoBackground` | `#E3F5FC` | Informational panels |
+| `GOPUFF_COLORS.selectedBackground` | `#8000FF` | Selected navigation/filter rows |
+| `GOPUFF_COLORS.infoBackground` | `#8000FF` | Informational panels |
 | `GOPUFF_COLORS.discount` | `#4BE39A` | Discount badges |
 | `GOPUFF_COLORS.pageBackground` | `#FAFAFA` | Results and light page backgrounds |
 | `GOPUFF_COLORS.overlay` | `rgba(0, 0, 0, 0.68)` | Modal backdrop |

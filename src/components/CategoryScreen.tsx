@@ -66,12 +66,16 @@ export const CategoryScreen: React.FC<CategoryScreenProps> = ({
   const [activeFilter, setActiveFilter] = useState('filter');
   const [sortOption, setSortOption] = useState('Most Relevant');
   const [nutritionFilters, setNutritionFilters] = useState<string[]>([]);
+  const [selectedFilterOptions, setSelectedFilterOptions] = useState<string[]>([]);
   const categoryProducts = useMemo(
     () => products.filter((product) => product.categoryId === category.id),
     [category.id, products],
   );
   const visibleProducts = useMemo(() => {
-    const source = categoryProducts.length ? categoryProducts : products.slice(0, 8);
+    let source = categoryProducts.length ? categoryProducts : products.slice(0, 8);
+    if (selectedFilterOptions.some((option) => ['All deals', 'Discounted items', 'Bundles'].includes(option))) {
+      source = source.filter((product) => Boolean(product.discount));
+    }
     if (sortOption === 'Price: Low to High') {
       return [...source].sort((a, b) => a.price - b.price);
     }
@@ -125,15 +129,18 @@ export const CategoryScreen: React.FC<CategoryScreenProps> = ({
               <Text style={styles.itemCount}>{categoryProducts.length || visibleProducts.length} ITEMS  ›</Text>
             </View>
 
-            {!isMobile && <ScrollView
+            <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.filters}
             >
-              {['☰', '🔥 Deals', 'Sort By', 'Nutrition', 'Category', 'Brands', 'Show in Stock'].map((filter) => (
+              {(isMobile
+                ? ['🔥 Deals', 'Sort By', 'Nutrition', 'Category', 'Brands', 'Show in Stock']
+                : ['☰', '🔥 Deals', 'Sort By', 'Nutrition', 'Category', 'Brands', 'Show in Stock']
+              ).map((filter) => (
                 <TouchableOpacity
                   key={filter}
-                  style={styles.filterChip}
+                  style={[styles.filterChip, isMobile && styles.filterChipMobile]}
                   onPress={() => {
                     setActiveFilter(
                       filter === '☰'
@@ -149,7 +156,7 @@ export const CategoryScreen: React.FC<CategoryScreenProps> = ({
                   {filter !== '☰' && <Ionicons name="chevron-down" size={16} color="#6B7280" />}
                 </TouchableOpacity>
               ))}
-            </ScrollView>}
+            </ScrollView>
 
             <View style={[styles.banner, isMobile && styles.bannerMobile]}>
               <Image
@@ -201,9 +208,11 @@ export const CategoryScreen: React.FC<CategoryScreenProps> = ({
         activeFilter={activeFilter}
         sortOption={sortOption}
         nutritionFilters={nutritionFilters}
+        selectedFilterOptions={selectedFilterOptions}
         onClose={() => setIsFilterOpen(false)}
         onSortChange={setSortOption}
         onNutritionChange={setNutritionFilters}
+        onFilterOptionsChange={setSelectedFilterOptions}
       />
     </View>
   );
@@ -215,18 +224,22 @@ const FilterSheet: React.FC<{
   activeFilter: string;
   sortOption: string;
   nutritionFilters: string[];
+  selectedFilterOptions: string[];
   onClose: () => void;
   onSortChange: (value: string) => void;
   onNutritionChange: (values: string[]) => void;
+  onFilterOptionsChange: (values: string[]) => void;
 }> = ({
   visible,
   isMobile,
   activeFilter,
   sortOption,
   nutritionFilters,
+  selectedFilterOptions,
   onClose,
   onSortChange,
   onNutritionChange,
+  onFilterOptionsChange,
 }) => {
   const sortOptions = ['Most Relevant', 'Price: Low to High', 'Price: High to Low'];
   const nutritionOptions = ['Organic', 'Gluten Free', 'Vegan', 'High Protein', 'Dairy Free', 'No Sugar Added'];
@@ -263,6 +276,13 @@ const FilterSheet: React.FC<{
         : [...nutritionFilters, option],
     );
   };
+  const toggleFilterOption = (option: string) => {
+    onFilterOptionsChange(
+      selectedFilterOptions.includes(option)
+        ? selectedFilterOptions.filter((value) => value !== option)
+        : [...selectedFilterOptions, option],
+    );
+  };
 
   return (
     <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
@@ -297,11 +317,17 @@ const FilterSheet: React.FC<{
               <TouchableOpacity
                 key={option}
                 style={styles.filterOption}
-                onPress={() => toggleNutrition(option)}
+                onPress={() => {
+                  if (activeFilter === 'nutrition') {
+                    toggleNutrition(option);
+                  } else {
+                    toggleFilterOption(option);
+                  }
+                }}
               >
                 <Text style={styles.filterOptionText}>{option}</Text>
-                <View style={[styles.checkbox, nutritionFilters.includes(option) && styles.checkboxSelected]}>
-                  {nutritionFilters.includes(option) && <Feather name="check" size={18} color="#FFFFFF" />}
+                <View style={[styles.checkbox, (activeFilter === 'nutrition' ? nutritionFilters : selectedFilterOptions).includes(option) && styles.checkboxSelected]}>
+                  {(activeFilter === 'nutrition' ? nutritionFilters : selectedFilterOptions).includes(option) && <Feather name="check" size={18} color="#FFFFFF" />}
                 </View>
               </TouchableOpacity>
             ))}
@@ -310,6 +336,7 @@ const FilterSheet: React.FC<{
             <TouchableOpacity style={styles.clearButton} onPress={() => {
               onSortChange('Most Relevant');
               onNutritionChange([]);
+              onFilterOptionsChange([]);
             }}>
               <Text style={styles.clearButtonText}>CLEAR ALL</Text>
             </TouchableOpacity>
@@ -359,7 +386,7 @@ const styles = StyleSheet.create({
   sidebarLabel: { fontFamily: GOPUFF_FONTS.family, color: '#666666', fontSize: 16, marginBottom: 12 },
   sidebarTitle: { fontFamily: GOPUFF_FONTS.family, fontSize: 21, fontWeight: '700', borderBottomWidth: 1, borderBottomColor: '#E5E7EB', paddingBottom: 14 },
   sidebarItem: { minHeight: 52, paddingHorizontal: 12, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 5 },
-  sidebarItemActive: { backgroundColor: '#E2F4FD' },
+  sidebarItemActive: { backgroundColor: '#8000FF' },
   sidebarItemText: { fontFamily: GOPUFF_FONTS.family, fontSize: 17, color: '#777777' },
   sidebarItemTextActive: { color: '#111111', fontWeight: '700' },
   content: { flex: 1, minWidth: 0, padding: 32 },
@@ -371,6 +398,7 @@ const styles = StyleSheet.create({
   itemCount: { fontFamily: GOPUFF_FONTS.family, fontSize: 16, color: '#777777', fontWeight: '900', fontStyle: 'italic' },
   filters: { gap: 9, paddingVertical: 18 },
   filterChip: { minHeight: 44, paddingHorizontal: 16, borderRadius: 23, backgroundColor: '#FFFFFF', flexDirection: 'row', alignItems: 'center', gap: 8, ...Platform.select({ web: { boxShadow: '0 3px 9px rgba(15, 23, 42, 0.10)' } as any }) },
+  filterChipMobile: { minHeight: 40, paddingHorizontal: 14, borderWidth: 1, borderColor: '#E5E7EB' },
   filterText: { fontFamily: GOPUFF_FONTS.family, color: '#737373', fontSize: 15, fontWeight: '700' },
   banner: { height: 215, borderRadius: 28, overflow: 'hidden', position: 'relative', marginBottom: 28 },
   bannerMobile: { height: 116, borderRadius: 25, marginHorizontal: 4, marginBottom: 34 },
@@ -404,10 +432,10 @@ const styles = StyleSheet.create({
   filterOption: { minHeight: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 30 },
   filterOptionText: { fontFamily: GOPUFF_FONTS.family, fontSize: 20, color: '#4B4B4B', fontWeight: '700' },
   radio: { width: 35, height: 35, borderRadius: 18, borderWidth: 1, borderColor: '#AAAAAA', alignItems: 'center', justifyContent: 'center' },
-  radioSelected: { borderColor: '#00A3FF', backgroundColor: '#00A3FF' },
+  radioSelected: { borderColor: '#8000FF', backgroundColor: '#8000FF' },
   radioDot: { width: 13, height: 13, borderRadius: 7, backgroundColor: '#FFFFFF' },
   checkbox: { width: 35, height: 35, borderRadius: 5, borderWidth: 1, borderColor: '#AAAAAA', alignItems: 'center', justifyContent: 'center' },
-  checkboxSelected: { backgroundColor: '#00A3FF', borderColor: '#00A3FF' },
+  checkboxSelected: { backgroundColor: '#8000FF', borderColor: '#8000FF' },
   sheetDivider: { height: 1, backgroundColor: '#E5E7EB', marginVertical: 17 },
   sheetActions: { position: 'absolute', left: 23, right: 23, bottom: 14, flexDirection: 'row', gap: 12 },
   desktopSheetActions: { left: 23, right: 23, bottom: 16 },

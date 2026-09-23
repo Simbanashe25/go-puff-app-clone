@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -23,11 +23,13 @@ const CUSTOM_ICONS = {
   search: require('../../assets/icons/search (4).svg'),
   shoppingBag: require('../../assets/icons/shopping-bag (3).svg'),
 };
+const APP_LOGO = require('../../assets/logo/now now logo.png');
 
 interface TopNavProps {
   onMenuPress?: () => void;
   onSearchChange?: (text: string) => void;
   onSearchSubmit?: (query?: string) => void;
+  focusSearchRequest?: number;
   onSignInPress?: () => void;
   onCartPress?: () => void;
   cartCount?: number;
@@ -45,6 +47,7 @@ export const TopNav: React.FC<TopNavProps> = ({
   onMenuPress,
   onSearchChange,
   onSearchSubmit,
+  focusSearchRequest,
   onSignInPress,
   onCartPress,
   cartCount = 0,
@@ -84,6 +87,12 @@ export const TopNav: React.FC<TopNavProps> = ({
     setIsFocused(true);
     setTimeout(() => searchInputRef.current?.focus(), 0);
   };
+
+  useEffect(() => {
+    if (focusSearchRequest) {
+      openSearch();
+    }
+  }, [focusSearchRequest]);
 
   const handleSearchProductPress = (product: Product) => {
     setIsFocused(false);
@@ -127,7 +136,7 @@ export const TopNav: React.FC<TopNavProps> = ({
             onPress={onLogoPress}
             accessibilityLabel="Go to home"
           >
-            <Text style={styles.logoText}>gopuff</Text>
+            <Image source={APP_LOGO} style={styles.logoImage} resizeMode="cover" />
           </TouchableOpacity>
         </View>
 
@@ -536,6 +545,10 @@ const styles = StyleSheet.create({
       },
     }),
   },
+  logoImage: {
+    width: 112,
+    height: 34,
+  },
   searchBarWrapper: {
     flex: 1,
     minWidth: 0,
@@ -574,7 +587,7 @@ const styles = StyleSheet.create({
     minWidth: 120,
     height: 44,
     borderWidth: 1.5,
-    borderColor: '#149BFF',
+    borderColor: '#8000FF',
     borderRadius: 9999,
     paddingHorizontal: 12,
     backgroundColor: GOPUFF_COLORS.white,

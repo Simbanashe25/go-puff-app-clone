@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
+import { Image, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 import { Feather, Ionicons } from '@expo/vector-icons';
 import { GOPUFF_FONTS } from '../constants/theme';
 import { GOPUFF_CATEGORIES } from '../data/categories';
+
+const APP_LOGO = require('../../assets/logo/now now logo.png');
 
 interface NavigationMenuProps {
   visible: boolean;
@@ -62,7 +64,7 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({
         <View style={[styles.drawer, isMobile && styles.drawerMobile]}>
           {isMobile && (
             <View style={styles.mobileDrawerHeader}>
-              <Text style={styles.mobileDrawerLogo}>gopuff</Text>
+              <Image source={APP_LOGO} style={styles.mobileDrawerLogo} resizeMode="cover" />
               <TouchableOpacity
                 onPress={handleClose}
                 style={styles.mobileDrawerClose}
@@ -242,11 +244,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   mobileDrawerLogo: {
-    fontFamily: GOPUFF_FONTS.family,
-    fontSize: 42,
-    fontWeight: '900',
-    letterSpacing: -1.4,
-    color: '#149BFF',
+    width: 150,
+    height: 48,
   },
   mobileDrawerClose: {
     width: 44,
@@ -370,7 +369,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   categoryItemSelected: {
-    backgroundColor: '#E2F4FD',
+    backgroundColor: '#8000FF',
     borderWidth: 2,
     borderColor: '#111111',
   },
@@ -420,7 +419,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   subcategorySelected: {
-    backgroundColor: '#E2F4FD',
+    backgroundColor: '#8000FF',
   },
   subcategoryText: {
     fontFamily: GOPUFF_FONTS.family,

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   Modal,
+  Image,
   Platform,
   ScrollView,
   StyleSheet,
@@ -19,6 +20,8 @@ import {
   GOPUFF_SIZES,
   GOPUFF_SPACING,
 } from '../constants/theme';
+
+const APP_LOGO = require('../../assets/logo/now now logo.png');
 
 interface AuthModalProps {
   visible: boolean;
@@ -88,7 +91,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ visible, onClose, onAuthen
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            <Text style={styles.logo}>gopuff</Text>
+            <Image source={APP_LOGO} style={styles.logo} resizeMode="cover" />
             <Text style={styles.title}>{mode === 'signIn' ? 'WELCOME BACK.' : 'JOIN GOPUFF.'}</Text>
             <Text style={styles.description}>
               {mode === 'signIn'
@@ -231,11 +234,9 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   logo: {
-    fontFamily: GOPUFF_FONTS.black,
-    fontSize: 40,
-    fontWeight: '900',
-    color: GOPUFF_COLORS.primary,
-    textAlign: 'center',
+    width: 190,
+    height: 52,
+    alignSelf: 'center',
     marginBottom: GOPUFF_SPACING.md,
   },
   title: {

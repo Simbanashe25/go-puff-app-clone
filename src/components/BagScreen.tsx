@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   divider: { height: 1, backgroundColor: '#E5E7EB', marginVertical: 34 },
   checkoutButton: { height: 52, borderRadius: 27, backgroundColor: '#1111EE', alignItems: 'center', justifyContent: 'center' },
   checkoutText: { color: '#FFFFFF', fontFamily: GOPUFF_FONTS.family, fontSize: 19, fontWeight: '900', fontStyle: 'italic' },
-  savingsCard: { backgroundColor: '#E3F5FC', borderRadius: 20, padding: 20, marginTop: 20, minHeight: 152 },
+  savingsCard: { backgroundColor: '#8000FF', borderRadius: 20, padding: 20, marginTop: 20, minHeight: 152 },
   savingsTitle: { fontFamily: GOPUFF_FONTS.family, color: '#4B4B4B', fontSize: 28, fontWeight: '900', fontStyle: 'italic' },
   savingsText: { fontFamily: GOPUFF_FONTS.family, color: '#4B5563', fontSize: 17, marginTop: 9 },
   famText: { color: '#0567B3', fontWeight: '900', fontStyle: 'italic' },

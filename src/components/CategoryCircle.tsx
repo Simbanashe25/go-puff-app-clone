@@ -176,7 +176,7 @@ export const CategoryCircle: React.FC<CategoryCircleProps> = ({
         // British fresh milk plastic bottle on bright blue
         return (
           <Svg width={size} height={size} viewBox="0 0 60 60">
-            <Circle cx="30" cy="30" r="30" fill="#00A3FF" />
+            <Circle cx="30" cy="30" r="30" fill="#8000FF" />
             <Ellipse cx="30" cy="51" rx="11" ry="3.5" fill="rgba(0,0,0,0.18)" />
             {/* Blue Cap */}
             <Rect x="27" y="13" width="6" height="3" rx="1" fill="#1D4ED8" />
@@ -278,7 +278,7 @@ export const CategoryCircle: React.FC<CategoryCircleProps> = ({
         // Classic red Coca-Cola can on electric blue
         return (
           <Svg width={size} height={size} viewBox="0 0 60 60">
-            <Circle cx="30" cy="30" r="30" fill="#00A3FF" />
+            <Circle cx="30" cy="30" r="30" fill="#8000FF" />
             <Ellipse cx="30" cy="51" rx="10" ry="3" fill="rgba(0,0,0,0.18)" />
             {/* Red can cylinder */}
             <Rect x="23" y="16" width="14" height="33" rx="2" fill="#EF4444" />

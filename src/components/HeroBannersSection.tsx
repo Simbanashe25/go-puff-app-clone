@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     }),
   },
   activeDot: {
-    backgroundColor: '#00A3FF',
+    backgroundColor: '#8000FF',
     width: 8,
   },
   bottomCardsRow: {

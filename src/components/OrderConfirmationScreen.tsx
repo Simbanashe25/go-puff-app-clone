@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { BagItem } from './BagScreen';
 import { GOPUFF_COLORS, GOPUFF_FONTS, GOPUFF_RADII, GOPUFF_SIZES, GOPUFF_SPACING } from '../constants/theme';
@@ -31,6 +31,7 @@ export const OrderConfirmationScreen: React.FC<Props> = ({ items, total, orderNu
           <View key={item.product.id} style={styles.itemRow}>
             <Text style={styles.quantity}>{item.quantity}x</Text>
             <Text style={styles.itemName} numberOfLines={1}>{item.product.name.replace(/\n/g, ' ')}</Text>
+            <Image source={item.product.imageSource} style={styles.itemImage} resizeMode="contain" />
             <Text style={styles.price}>${(item.product.price * item.quantity).toFixed(2)}</Text>
           </View>
         ))}
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
   itemRow: { flexDirection: 'row', alignItems: 'center', gap: GOPUFF_SPACING.sm, marginBottom: GOPUFF_SPACING.md },
   quantity: { width: 28, fontFamily: GOPUFF_FONTS.black, fontWeight: '900', color: GOPUFF_COLORS.action },
   itemName: { flex: 1, fontFamily: GOPUFF_FONTS.regular, fontSize: 15, color: GOPUFF_COLORS.dark },
+  itemImage: { width: 42, height: 42, marginHorizontal: GOPUFF_SPACING.xs },
   price: { fontFamily: GOPUFF_FONTS.bold, fontWeight: '800', color: GOPUFF_COLORS.black },
   divider: { height: 1, backgroundColor: GOPUFF_COLORS.borderLight, marginVertical: GOPUFF_SPACING.md },
   totalRow: { flexDirection: 'row', justifyContent: 'space-between' },

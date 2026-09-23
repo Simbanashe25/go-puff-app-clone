@@ -56,7 +56,7 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({
             <Feather
               name="chevron-right"
               size={16}
-              color={itemCount !== undefined ? '#6B7280' : '#00A3FF'}
+              color={itemCount !== undefined ? '#6B7280' : '#8000FF'}
             />
           </TouchableOpacity>
 
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     fontFamily: GOPUFF_FONTS.family,
     fontSize: 14,
     fontWeight: '700', // Bold
-    color: '#00A3FF',
+    color: '#8000FF',
     marginRight: 2,
   },
   itemCountText: {

@@ -37,6 +37,7 @@ interface CheckoutScreenProps {
   onSearchProductPress: (product: Product) => void;
   onSearchChange: (text: string) => void;
   onSearchSubmit: (query?: string) => void;
+  focusSearchRequest?: number;
   onBack: () => void;
   onComplete: () => void;
 }
@@ -56,6 +57,7 @@ export const CheckoutScreen: React.FC<CheckoutScreenProps> = ({
   onSearchProductPress,
   onSearchChange,
   onSearchSubmit,
+  focusSearchRequest,
   onBack,
   onComplete,
 }) => {
@@ -93,6 +95,7 @@ export const CheckoutScreen: React.FC<CheckoutScreenProps> = ({
         onSearchProductPress={onSearchProductPress}
         onSearchChange={onSearchChange}
         onSearchSubmit={onSearchSubmit}
+        focusSearchRequest={focusSearchRequest}
       />
       <View style={styles.header}>
         <TouchableOpacity onPress={onBack} style={styles.backButton}>
@@ -224,8 +227,8 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   cardTitle: { fontFamily: GOPUFF_FONTS.bold, fontSize: 17, fontWeight: '800', color: GOPUFF_COLORS.black },
   cardSubtext: { fontFamily: GOPUFF_FONTS.regular, fontSize: 15, color: GOPUFF_COLORS.grayText, marginTop: 3 },
-  inputRow: { flexDirection: 'row', alignItems: 'flex-start', gap: GOPUFF_SPACING.md },
-  input: { flex: 1, height: GOPUFF_SIZES.controlHeight, minHeight: GOPUFF_SIZES.controlHeight, maxHeight: GOPUFF_SIZES.controlHeight, borderWidth: 1, borderColor: GOPUFF_COLORS.border, borderRadius: GOPUFF_RADII.sm, paddingHorizontal: GOPUFF_SPACING.md, paddingVertical: 0, marginBottom: GOPUFF_SPACING.md, fontFamily: GOPUFF_FONTS.regular, fontSize: 16, color: GOPUFF_COLORS.black, backgroundColor: GOPUFF_COLORS.white },
+  inputRow: { width: '100%', flexDirection: 'row', alignItems: 'flex-start', gap: GOPUFF_SPACING.md },
+  input: { flex: 1, minWidth: 0, height: GOPUFF_SIZES.controlHeight, minHeight: GOPUFF_SIZES.controlHeight, maxHeight: GOPUFF_SIZES.controlHeight, borderWidth: 1, borderColor: GOPUFF_COLORS.border, borderRadius: GOPUFF_RADII.sm, paddingHorizontal: GOPUFF_SPACING.md, paddingVertical: 0, marginBottom: GOPUFF_SPACING.md, fontFamily: GOPUFF_FONTS.regular, fontSize: 16, color: GOPUFF_COLORS.black, backgroundColor: GOPUFF_COLORS.white },
   paymentOption: { minHeight: 64, flexDirection: 'row', alignItems: 'center', gap: GOPUFF_SPACING.md, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: GOPUFF_COLORS.borderLight, marginBottom: GOPUFF_SPACING.md },
   radio: { width: 26, height: 26, borderRadius: 13, borderWidth: 2, borderColor: GOPUFF_COLORS.borderDark },
   radioSelected: { borderColor: GOPUFF_COLORS.action, backgroundColor: GOPUFF_COLORS.action },

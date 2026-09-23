@@ -1,15 +1,15 @@
 import { Platform } from 'react-native';
 
 export const GOPUFF_COLORS = {
-  primary: '#00A3FF',       // Gopuff vibrant electric blue
+  primary: '#8000FF',
   primaryHover: '#008ae6',
   action: '#1010F5',
   actionHover: '#0909C9',
   success: '#00875A',
   discount: '#4BE39A',
   promoYellow: '#FFF0B3',
-  infoBackground: '#E3F5FC',
-  selectedBackground: '#E2F4FD',
+  infoBackground: '#8000FF',
+  selectedBackground: '#8000FF',
   black: '#111111',
   dark: '#222222',
   grayText: '#666666',

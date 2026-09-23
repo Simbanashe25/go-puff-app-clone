@@ -63,6 +63,7 @@ export default function App() {
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchResultsOpen, setIsSearchResultsOpen] = useState(false);
+  const [focusSearchRequest, setFocusSearchRequest] = useState(0);
   const cartCount = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
 
   // Load native fonts for Expo mobile
@@ -97,7 +98,7 @@ export default function App() {
         <LoadingSkeleton style={styles.loadingLogoSkeleton} />
         <LoadingSkeleton style={styles.loadingContentSkeleton} />
         <LoadingSkeleton style={styles.loadingContentSkeleton} />
-        <ActivityIndicator size="small" color="#00A3FF" />
+        <ActivityIndicator size="small" color="#8000FF" />
       </View>
     );
   }
@@ -288,6 +289,7 @@ export default function App() {
         onSearchProductPress={handleProductPress}
         onSearchChange={setSearchQuery}
         onSearchSubmit={handleSearchSubmit}
+        focusSearchRequest={focusSearchRequest}
         onBack={() => {
           setIsCheckoutOpen(false);
           setIsBagOpen(true);
@@ -310,6 +312,7 @@ export default function App() {
           onSearchProductPress={handleProductPress}
           onSearchChange={setSearchQuery}
           onSearchSubmit={handleSearchSubmit}
+          focusSearchRequest={focusSearchRequest}
         />
         <BagScreen
           items={Object.values(cartItems)}
@@ -337,6 +340,7 @@ export default function App() {
           onSearchProductPress={handleProductPress}
           onSearchChange={setSearchQuery}
           onSearchSubmit={handleSearchSubmit}
+          focusSearchRequest={focusSearchRequest}
         />
         <SearchResultsScreen
           key={`search-${searchQuery}`}
@@ -363,6 +367,7 @@ export default function App() {
           onSearchProductPress={handleProductPress}
           onSearchChange={setSearchQuery}
           onSearchSubmit={handleSearchSubmit}
+          focusSearchRequest={focusSearchRequest}
         />
         <CategoryScreen
           key={selectedCategoryId}
@@ -510,7 +515,8 @@ export default function App() {
           setPage(null);
           setIsBagOpen(false);
           setSelectedProduct(null);
-          setIsSearchResultsOpen(true);
+          setIsSearchResultsOpen(false);
+          setFocusSearchRequest((request) => request + 1);
         }}
         onBag={handleCartPress}
         onAccount={() => {

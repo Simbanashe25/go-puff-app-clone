@@ -35,7 +35,7 @@ export const GOPUFF_CATEGORIES: CategoryItem[] = [
   {
     id: 'eggs-dairy',
     label: 'Eggs & Dairy',
-    bgColor: '#00A3FF',
+    bgColor: '#8000FF',
     type: 'eggs_dairy',
   },
   {
@@ -59,7 +59,7 @@ export const GOPUFF_CATEGORIES: CategoryItem[] = [
   {
     id: 'drinks',
     label: 'Drinks',
-    bgColor: '#00A3FF',
+    bgColor: '#8000FF',
     type: 'drinks',
   },
   {

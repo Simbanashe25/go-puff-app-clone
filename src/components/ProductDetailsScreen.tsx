@@ -513,7 +513,7 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: 56,
     borderRadius: 30,
-    backgroundColor: '#00A3FF',
+    backgroundColor: '#8000FF',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
@@ -668,7 +668,7 @@ const styles = StyleSheet.create({
   },
   coveragePanel: {
     borderWidth: 1,
-    borderColor: '#00A3FF',
+    borderColor: '#8000FF',
     borderRadius: 12,
     padding: 24,
     marginTop: 36,

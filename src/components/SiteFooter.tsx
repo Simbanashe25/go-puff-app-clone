@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   Platform,
+  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -10,6 +11,8 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { GOPUFF_FONTS } from '../constants/theme';
+
+const APP_LOGO = require('../../assets/logo/now now logo.png');
 
 interface SiteFooterProps {
   locationName: string;
@@ -36,7 +39,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({
   return (
     <View style={styles.footer}>
       <View style={[styles.intro, isMobile && styles.introMobile]}>
-        <Text style={styles.logo}>gopuff</Text>
+        <Image source={APP_LOGO} style={styles.logo} resizeMode="cover" />
         <Text style={[styles.description, isMobile && styles.descriptionMobile]}>
           Gopuff delivers groceries, snacks, alcohol, household essentials and more in just 15 minutes.
         </Text>
@@ -118,11 +121,8 @@ const styles = StyleSheet.create({
     paddingBottom: 34,
   },
   logo: {
-    fontFamily: GOPUFF_FONTS.family,
-    fontSize: 40,
-    lineHeight: 46,
-    fontWeight: '900',
-    color: '#00A3FF',
+    width: 190,
+    height: 52,
   },
   description: {
     fontFamily: GOPUFF_FONTS.family,
